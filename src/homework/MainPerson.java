@@ -12,5 +12,13 @@ public class MainPerson {
 //        thirdPerson.setMoney(0);
 //        System.out.println(secondPerson.getMoney());
 //        System.out.println(thirdPerson.getAge());
+
+//        Worker daniil = new Worker();
+//        daniil.setName("Daniil");
+//        Worker ivan = new Worker();
+//        ivan.setName("Ivan");
+//        ivan.setDad(daniil);
+//        Worker sergey = new Worker();
+//        daniil.setName("Sergey");
     }
 }

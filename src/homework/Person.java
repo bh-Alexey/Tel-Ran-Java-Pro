@@ -10,6 +10,8 @@ public abstract class Person {
     private int money;
     private PersonGender gender;
 
+    private Person dad;
+
     private final static double COEFICIENT_OF_PENSION = 0.25;
 
     public Person(String name, int age, double weight, double heigth, int money) {
@@ -25,6 +27,20 @@ public abstract class Person {
         this.name = name;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Person getDad() {
+        return dad;
+    }
+    public void setDad(Person dad) {
+        this.dad = dad;
+    }
     public PersonGender getGender() {
         return gender;
     }
