@@ -98,6 +98,9 @@ public class RetirementFund {
     }
 
     public double calculateMedianPension() {
+        if (getDepositors() == null) {
+            return 0.0;
+        }
         double pensionPaid = 0;
         for (Worker element: depositors) {
             pensionPaid += element.calculatePension();
