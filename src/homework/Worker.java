@@ -1,12 +1,19 @@
 package homework;
 
+import java.util.Set;
+
 public class Worker extends Person implements AbleToCalculatePension {
     private double minSalary;
     private double maxSalary;
 
-    private String profession;
-
     private final static double COEFICIENT_OF_PENSION = 0.25;
+
+    private final static int PROFFESSIONS_COEFFICIENT = 3;
+
+    private final static double ADDITIONAL_COEFFICIENT = 0.05;
+
+    private Set<Professions> professions;
+
 
     public Worker(String name, int age, double weight, double heigth, int money, double minSalary, double maxSalary) {
         super(name, age, weight, heigth, money);
@@ -14,15 +21,17 @@ public class Worker extends Person implements AbleToCalculatePension {
         this.minSalary = minSalary;
     }
 
-    public Worker(String name, String profession, double minSalary) {
+    public Worker(String name, double minSalary) {
         super(name);
-        this.profession = profession;
         this.minSalary = minSalary;
     }
 
-    public Worker(String name, String profession) {
-        super(name);
-        this.profession = profession;
+    public Set<Professions> getProfessions() {
+        return professions;
+    }
+
+    public void setProfessions(Set<Professions> professions) {
+        this.professions = professions;
     }
 
     public double getMinSalary() {
@@ -39,14 +48,6 @@ public class Worker extends Person implements AbleToCalculatePension {
 
     public void setMaxSalary(double maxSalary) {
         this.maxSalary = maxSalary;
-    }
-
-    public String getProfession() {
-        return profession;
-    }
-
-    public void setProfession(String profession) {
-        this.profession = profession;
     }
 
     @Override
@@ -87,19 +88,32 @@ public class Worker extends Person implements AbleToCalculatePension {
 
     @Override
     public void die(int years) {
-        System.out.println("This retiree will die after " + years + " лет" );
+        System.out.println("This retiree will die after " + years + " years" );
     }
     
     @Override
     public double calculatePension() {
-        if (getGender() == null) {
+        Gender gender = getGender();
+
+        if (gender == null) {
             return 0.0;
         }
-        if (getGender() == PersonGender.MALE) {
-            return CalculatorUtils.calculateAverage((int) minSalary, (int) maxSalary) * COEFICIENT_OF_PENSION;
+
+        double averageSalary;
+        if (getGender() == Gender.MALE) {
+            averageSalary =  CalculatorUtils.calculateAverage((int) minSalary, (int) maxSalary);
         }
         else {
-            return CalculatorUtils.calculateAverage((int) (minSalary / 2), (int) (maxSalary * 2)) * COEFICIENT_OF_PENSION;
+            averageSalary = CalculatorUtils.calculateAverage((int) (minSalary / 2), (int) (maxSalary * 2));
         }
+
+        double professionsReward = 0.0;
+
+        if (professions != null) {
+            int countProffessions = professions.size();
+            professionsReward = countProffessions / PROFFESSIONS_COEFFICIENT * ADDITIONAL_COEFFICIENT;
+        }
+
+        return averageSalary * COEFICIENT_OF_PENSION * (1 + professionsReward);
     }
 }

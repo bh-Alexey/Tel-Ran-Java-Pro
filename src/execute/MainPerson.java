@@ -1,4 +1,4 @@
-package homework;
+package execute;
 
 public class MainPerson {
     public static void main(String[] args) {

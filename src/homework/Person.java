@@ -8,7 +8,7 @@ public abstract class Person {
     private double weight;
     private double heigth;
     private int money;
-    private PersonGender gender;
+    private Gender gender;
 
     private Person dad;
 
@@ -41,7 +41,7 @@ public abstract class Person {
     public void setDad(Person dad) {
         this.dad = dad;
     }
-    public PersonGender getGender() {
+    public Gender getGender() {
         return gender;
     }
 
@@ -73,7 +73,7 @@ public abstract class Person {
         this.heigth = heigth;
     }
 
-    public void setGender(PersonGender gender) {
+    public void setGender(Gender gender) {
         this.gender = gender;
     }
 

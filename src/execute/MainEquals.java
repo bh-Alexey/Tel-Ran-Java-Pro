@@ -1,4 +1,4 @@
-package vehicles;
+package execute;
 
 public class MainEquals {
     public static void main(String[] args) {

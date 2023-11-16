@@ -1,4 +1,6 @@
-package vehicles;
+package execute;
+
+import vehicles.*;
 
 public class MainExample {
     public static void main(String[] args) {

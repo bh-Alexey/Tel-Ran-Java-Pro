@@ -1,6 +1,6 @@
 package homework;
 
-public enum PersonGender {
+public enum Gender {
     MALE,
     FEMALE;
 }

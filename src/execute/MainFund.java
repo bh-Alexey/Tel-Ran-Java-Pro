@@ -1,4 +1,6 @@
-package homework;
+package execute;
+
+import homework.RetirementFund;
 
 public class MainFund {
     public static void main(String[] args) {
