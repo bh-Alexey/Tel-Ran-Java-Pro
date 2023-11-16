@@ -1,14 +1,17 @@
 package homework;
 
-import java.util.ArrayList;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class RetirementFund {
     private String fundName;
     private boolean stateGovernment;
-    private String registerDate;
-
-    private ArrayList<Worker> depositors = new ArrayList<>();
+    private final String registerDate;
+    private List<Worker> depositors;
+    private Map<DayOfWeek, Boolean> workDays;
 
     public RetirementFund(String fundName, boolean stateGovernment, String registerDate) {
         this.fundName = fundName;
@@ -16,11 +19,19 @@ public class RetirementFund {
         this.registerDate = registerDate;
     }
 
-    public void setDepositors(ArrayList<Worker> depositors) {
+    public Map<DayOfWeek, Boolean> getWorkDays() {
+        return workDays;
+    }
+
+    public void setWorkDays(Map<DayOfWeek, Boolean> workDays) {
+        this.workDays = workDays;
+    }
+
+    public void setDepositors(List<Worker> depositors) {
         this.depositors = depositors;
     }
 
-    public ArrayList<Worker> getDepositors() {
+    public List<Worker> getDepositors() {
         return depositors;
     }
 
@@ -48,7 +59,7 @@ public class RetirementFund {
     public void getInfo() {
         System.out.println(fundName);
         System.out.println("Registration date is " + registerDate);
-        if (stateGovernment == true) {
+        if (stateGovernment) {
             System.out.println("Participants: more than " + depositors.size() / 1000 + " thousand");
             System.out.println();
         } else {
@@ -90,11 +101,22 @@ public class RetirementFund {
         if (obj == null) {
             return 0.0;
         }
-        if (stateGovernment) {
+        if (stateGovernment && isWorkDayToday()) {
             return obj.calculatePension();
         } else {
             return 0;
         }
+    }
+
+    private boolean isWorkDayToday() {
+        LocalDate localDate = LocalDate.now();
+        DayOfWeek dayOfWeekNow = localDate.getDayOfWeek();
+
+        if (workDays == null) {
+            return false;
+        }
+
+        return workDays.get(dayOfWeekNow);
     }
 
     public double calculateMedianPension() {
